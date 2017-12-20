@@ -250,12 +250,22 @@ class CapitalT(object):
         #     move_by.pdf. Note: the pdf shows the different locations
         #     that the T moves through, but there is only 1 T at any moment.
         # --------------------------------------------------------------
-        self.intersection_center.x = self.intersection_center.x + dx
-        self.intersection_center.y = self.intersection_center.y + dy
-        self.intersection_center = rg.Point(self.intersection_center.x, self.intersection_center.y)
-        new = CapitalT(self.intersection_center, self.width, self.height, self.letter_thickness)
-        new.set_colors(self.fill, self.out)
-        new.attach_to(self.window)
+        h = self.h_rect
+        v = self.v_rect
+
+        h1 = rg.Point(h.get_upper_left_corner().x + dx, h.get_upper_left_corner().y + dy)
+        h2 = rg.Point(h.get_lower_right_corner().x + dx, h.get_lower_right_corner().y + dy)
+        v1 = rg.Point(v.get_upper_left_corner().x + dx, v.get_upper_left_corner().y + dy)
+        v2 = rg.Point(v.get_lower_right_corner().x + dx, v.get_lower_right_corner().y + dy)
+        self.h_rect = rg.Rectangle(h1, h2)
+        self.v_rect = rg.Rectangle(v1, v2)
+        self.set_colors(self.fill, self.out)
+        if self.window != 0:
+            self.h_rect.attach_to(self.window)
+            self.v_rect.attach_to(self.window)
+        else:
+            pass
+
 
 
     def clone(self):
@@ -277,15 +287,17 @@ class CapitalT(object):
         Type hints:
           :rtype: CapitalT
         """
+
         # --------------------------------------------------------------
-        # TODO: 7.
+        # DONE: 7.
         #   READ the above specification, including the Example.
         #   Implement and test this method by uncommenting the appropriate
         #     run_test method in main. Compare the graphics window to
         #     clone.pdf.
         # --------------------------------------------------------------
-        return CapitalT(self.intersection_center,self.width,self.height,self.letter_thickness)
-
+        newt = CapitalT(self.intersection_center, self.width, self.height, self.letter_thickness)
+        newt.set_colors(self.fill, self.out)
+        return newt
 
 # ----------------------------------------------------------------------
 # If this module is running at the top level (as opposed to being
