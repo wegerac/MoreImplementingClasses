@@ -42,6 +42,8 @@ class Baby(object):
     def __init__(self,Name_of_Baby):
 
         self.name = Name_of_Baby
+        self.hours_passed = 0
+        print('Hello',self.name,'!')
 
 
     def feed_baby(self):
@@ -49,9 +51,19 @@ class Baby(object):
         print('Thank you for feeding baby',self.name)
 
     def hour_passes(self):
+        if self.hours_passed == 0:
+            print('Baby',self.name,'is sleepimg.')
+            self.hours_passed = self.hours_passed + 1
+        elif self.hours_passed == 1:
+            print('Baby',self.name,'is awake. Time for food.')
+            self.hours_passed = self.hours_passed + 1
+        else:
+            print('Baby',self.name,'is CRYING uncontrollably! Feed the Baby!')
+
+
 
 # ----------------------------------------------------------------------
-# TODO: 2. Implement a class called   Baby   that has a constructor and
+# DONE: 2. Implement a class called   Baby   that has a constructor and
 #   two methods, as described below.  Your finished Baby class should
 #   cause the code above to display the expected output.  Hint: Your
 #   class will need instance variables that you must figure out.
